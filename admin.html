@@ -5,43 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>لوحة التحكم</title>
     <link rel="stylesheet" href="styles.css" />
-    <style>
-      section {
-        width: 100%;
-        max-width: 500px;
-        margin: auto;
-        padding: 1em;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        margin-bottom: 2em;
-      }
-      form label {
-        display: block;
-        margin-top: 1em;
-      }
-      form input,
-      form select,
-      form textarea {
-        width: 100%;
-        padding: 0.5em;
-        margin-top: 0.5em;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      ul {
-        list-style: none;
-        padding: 0;
-      }
-      ul li {
-        margin: 0.5em 0;
-        padding: 0.5em;
-        background-color: white;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-    </style>
   </head>
   <body>
     <header>
@@ -70,14 +33,13 @@
             >الألوان المتوفرة (افصلي بينها بفاصلة):</label
           >
           <input type="text" id="product-colors" required />
-          <label for="product-image">رابط صورة المنتج:</label>
-          <input type="text" id="product-image" required />
-          <label for="product-width">العرض:</label>
-          <input type="text" id="product-width" required />
-          <label for="product-height">الطول:</label>
-          <input type="text" id="product-height" required />
-          <label for="product-details">التفاصيل:</label>
-          <textarea id="product-details" required></textarea>
+          <label for="product-sizes"
+            >الأحجام المتوفرة (افصلي بينها بفاصلة، مثل: صغير، متوسط،
+            كبير):</label
+          >
+          <input type="text" id="product-sizes" required />
+          <label for="product-image">تحميل صور المنتج:</label>
+          <input type="file" id="product-images" multiple />
           <button type="button" onclick="addProduct()">إضافة المنتج</button>
         </form>
       </section>

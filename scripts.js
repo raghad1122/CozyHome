@@ -44,7 +44,7 @@ function loadProductsByCategory() {
         const productElement = document.createElement('div');
         productElement.className = 'product';
         productElement.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
+            <img src="${product.images[0]}" alt="${product.name}">
             <h2>${product.name}</h2>
             <p>السعر: ${product.price}</p>
             <button onclick="viewProduct(${index})">عرض التفاصيل</button>
@@ -62,20 +62,40 @@ function loadProductDetails() {
     const product = JSON.parse(localStorage.getItem('currentProduct'));
     const productDetails = document.getElementById('product-details');
     productDetails.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
+        <img src="${product.images[0]}" alt="${product.name}">
         <h2>${product.name}</h2>
         <p>السعر: ${product.price}</p>
-        <p>الألوان المتوفرة: ${product.colors.join(', ')}</p>
+        <p>الألوان المتوفرة:</p>
+        <select id="product-color">
+            ${product.colors.map(color => `<option value="${color}">${color}</option>`).join('')}
+        </select>
+        <p>الأحجام المتوفرة:</p>
+        <select id="product-size" onchange="displaySizeDetails()">
+            ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
+        </select>
+        <div id="size-details"></div>
         <p>${product.details}</p>
-        <p>العرض: ${product.width}</p>
-        <p>الطول: ${product.height}</p>
         <button onclick="addToCart(${product.id})">أضف إلى السلة</button>
+    `;
+}
+
+function displaySizeDetails() {
+    const product = JSON.parse(localStorage.getItem('currentProduct'));
+    const selectedSize = document.getElementById('product-size').value;
+    const sizeDetails = product.sizesDetails[selectedSize] || {};
+    document.getElementById('size-details').innerHTML = `
+        <p>العرض: ${sizeDetails.width || ''}</p>
+        <p>الطول: ${sizeDetails.height || ''}</p>
+        <p>الارتفاع: ${sizeDetails.depth || ''}</p>
     `;
 }
 
 function addToCart(productId) {
     const product = products[productId];
-    cart.push(product);
+    const selectedColor = document.getElementById('product-color').value;
+    const selectedSize = document.getElementById('product-size').value;
+    const productWithOptions = { ...product, selectedColor, selectedSize };
+    cart.push(productWithOptions);
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
 }
@@ -87,7 +107,7 @@ function updateCart() {
         cart.forEach((product, index) => {
             const li = document.createElement('li');
             li.innerHTML = `
-                ${product.name} - ${product.price}
+                ${product.name} - ${product.price} - ${product.selectedColor} - ${product.selectedSize}
                 <button onclick="removeFromCart(${index})">إزالة</button>
             `;
             cartElement.appendChild(li);

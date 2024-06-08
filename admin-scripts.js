@@ -76,21 +76,16 @@ function addProduct() {
     const name = document.getElementById('product-name').value;
     const price = document.getElementById('product-price').value;
     const colors = document.getElementById('product-colors').value.split(',');
-    const image = document.getElementById('product-image').value;
-    const width = document.getElementById('product-width').value;
-    const height = document.getElementById('product-height').value;
-    const details = document.getElementById('product-details').value;
-
+    const sizes = document.getElementById('product-sizes').value.split(',');
+    const images = Array.from(document.getElementById('product-images').files).map(file => URL.createObjectURL(file));
     const newProduct = {
         id: products.length,
         category,
         name,
         price,
         colors,
-        image,
-        width,
-        height,
-        details
+        sizes,
+        images
     };
 
     products.push(newProduct);
@@ -108,13 +103,11 @@ function loadProductsAdmin() {
         const productElement = document.createElement('div');
         productElement.className = 'admin-product';
         productElement.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
+            <img src="${product.images[0]}" alt="${product.name}">
             <h2>${product.name}</h2>
             <p>السعر: ${product.price}</p>
             <p>الألوان المتوفرة: ${product.colors.join(', ')}</p>
-            <p>${product.details}</p>
-            <p>العرض: ${product.width}</p>
-            <p>الطول: ${product.height}</p>
+            <p>الأحجام المتوفرة: ${product.sizes.join(', ')}</p>
             <button onclick="editProduct(${index})">تعديل</button>
             <button onclick="deleteProduct(${index})">حذف</button>
         `;
@@ -128,11 +121,7 @@ function editProduct(productId) {
     document.getElementById('product-name').value = product.name;
     document.getElementById('product-price').value = product.price;
     document.getElementById('product-colors').value = product.colors.join(',');
-    document.getElementById('product-image').value = product.image;
-    document.getElementById('product-width').value = product.width;
-    document.getElementById('product-height').value = product.height;
-    document.getElementById('product-details').value = product.details;
-    
+    document.getElementById('product-sizes').value = product.sizes.join(',');
     deleteProduct(productId);
 }
 
