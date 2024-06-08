@@ -3,7 +3,7 @@ let products = JSON.parse(localStorage.getItem('products')) || [];
 let orders = JSON.parse(localStorage.getItem('orders')) || [];
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('adminLoggedIn') !== 'true') {
+    if (localStorage.getItem('adminLoggedIn') !== 'true' && window.location.pathname.endsWith('admin.html')) {
         window.location.href = 'login.html';
     }
     loadCategoriesAdmin();

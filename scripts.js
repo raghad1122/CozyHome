@@ -1,4 +1,4 @@
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let categories = JSON.parse(localStorage.getItem('categories')) || [];
 let products = JSON.parse(localStorage.getItem('products')) || [];
 
@@ -76,6 +76,7 @@ function loadProductDetails() {
 function addToCart(productId) {
     const product = products[productId];
     cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
 }
 
@@ -83,12 +84,21 @@ function updateCart() {
     const cartElement = document.getElementById('cart-list');
     if (cartElement) {
         cartElement.innerHTML = '';
-        cart.forEach(product => {
+        cart.forEach((product, index) => {
             const li = document.createElement('li');
-            li.innerText = `${product.name} - ${product.price}`;
+            li.innerHTML = `
+                ${product.name} - ${product.price}
+                <button onclick="removeFromCart(${index})">إزالة</button>
+            `;
             cartElement.appendChild(li);
         });
     }
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
 }
 
 function checkout() {
@@ -108,8 +118,9 @@ function checkout() {
         orders.push(order);
         localStorage.setItem('orders', JSON.stringify(orders));
         
-        alert(' تم تأكيد الطلب بنجاح!سوف يتم التواصل معك في أقرب وقت');
+        alert('تم تأكيد الطلب بنجاح!');
         cart = [];
+        localStorage.removeItem('cart');
         updateCart();
     } else {
         alert('يرجى إدخال جميع البيانات المطلوبة.');
