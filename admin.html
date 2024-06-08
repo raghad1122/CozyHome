@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحة التحكم</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      section {
+        width: 100%;
+        max-width: 500px;
+        margin: auto;
+        padding: 1em;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2em;
+      }
+      form label {
+        display: block;
+        margin-top: 1em;
+      }
+      form input,
+      form select,
+      form textarea {
+        width: 100%;
+        padding: 0.5em;
+        margin-top: 0.5em;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      ul li {
+        margin: 0.5em 0;
+        padding: 0.5em;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>لوحة التحكم</h1>
+      <button onclick="logout()">تسجيل الخروج</button>
+    </header>
+    <main>
+      <section>
+        <h2>إضافة تصنيف جديد</h2>
+        <form id="category-form">
+          <label for="category-name">اسم التصنيف:</label>
+          <input type="text" id="category-name" required />
+          <button type="button" onclick="addCategory()">إضافة التصنيف</button>
+        </form>
+      </section>
+      <section>
+        <h2>إضافة منتج جديد</h2>
+        <form id="product-form">
+          <label for="product-category">التصنيف:</label>
+          <select id="product-category" required></select>
+          <label for="product-name">اسم المنتج:</label>
+          <input type="text" id="product-name" required />
+          <label for="product-price">السعر:</label>
+          <input type="text" id="product-price" required />
+          <label for="product-colors"
+            >الألوان المتوفرة (افصلي بينها بفاصلة):</label
+          >
+          <input type="text" id="product-colors" required />
+          <label for="product-image">رابط صورة المنتج:</label>
+          <input type="text" id="product-image" required />
+          <label for="product-width">العرض:</label>
+          <input type="text" id="product-width" required />
+          <label for="product-height">الطول:</label>
+          <input type="text" id="product-height" required />
+          <label for="product-details">التفاصيل:</label>
+          <textarea id="product-details" required></textarea>
+          <button type="button" onclick="addProduct()">إضافة المنتج</button>
+        </form>
+      </section>
+      <section>
+        <h2>إدارة التصنيفات</h2>
+        <ul id="category-list-admin"></ul>
+      </section>
+      <section>
+        <h2>إدارة المنتجات</h2>
+        <ul id="product-list-admin"></ul>
+      </section>
+      <section>
+        <h2>الطلبات</h2>
+        <ul id="order-list"></ul>
+      </section>
+    </main>
+    <script src="admin-scripts.js"></script>
+  </body>
+</html>

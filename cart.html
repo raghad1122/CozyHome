@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سلة الشراء</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>سلة الشراء</h1>
+      <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="cart.html">سلة الشراء</a>
+      </nav>
+    </header>
+    <main>
+      <ul id="cart-list"></ul>
+      <form id="checkout-form">
+        <label for="full-name">الاسم الكامل:</label>
+        <input type="text" id="full-name" required />
+        <label for="phone-number">رقم الهاتف:</label>
+        <input type="text" id="phone-number" required />
+        <label for="whatsapp-country-code">مقدمة البلد:</label>
+        <select id="whatsapp-country-code" required>
+          <option value="+970">+970</option>
+          <option value="+972">+972</option>
+          <!-- أضف المزيد من الخيارات هنا -->
+        </select>
+        <label for="whatsapp-number">رقم الواتس:</label>
+        <input type="text" id="whatsapp-number" required />
+        <button type="button" onclick="checkout()">تأكيد الطلب</button>
+      </form>
+    </main>
+    <script src="scripts.js"></script>
+  </body>
+</html>
