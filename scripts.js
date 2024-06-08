@@ -82,7 +82,7 @@ function loadProductDetails() {
 function displaySizeDetails() {
     const product = JSON.parse(localStorage.getItem('currentProduct'));
     const selectedSize = document.getElementById('product-size').value;
-    const sizeDetails = product.sizesDetails[selectedSize] || {};
+    const sizeDetails = product.sizesDetails && product.sizesDetails[selectedSize] || {};
     document.getElementById('size-details').innerHTML = `
         <p>العرض: ${sizeDetails.width || ''}</p>
         <p>الطول: ${sizeDetails.height || ''}</p>

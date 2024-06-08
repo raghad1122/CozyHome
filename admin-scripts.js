@@ -94,6 +94,7 @@ function addProduct() {
     document.getElementById('product-form').reset();
     alert('تمت إضافة المنتج بنجاح');
     loadProductsAdmin();
+    loadProductsCustomer();  // للتأكد من أن المنتجات تظهر للزبائن أيضًا
 }
 
 function loadProductsAdmin() {
@@ -141,7 +142,7 @@ function loadOrders() {
             <p>الهاتف: ${order.phoneNumber}</p>
             <p>الواتس: ${order.whatsappNumber}</p>
             <ul>
-                ${order.cart.map(product => `<li>${product.name} - ${product.price}</li>`).join('')}
+                ${order.cart.map(product => <li>${product.name} - ${product.price}</li>).join('')}
             </ul>
         `;
         orderList.appendChild(li);
